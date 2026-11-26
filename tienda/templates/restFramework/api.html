@@ -1,0 +1,18 @@
+{% extends "rest_framework/base.html" %}
+
+{% block title %}API | Casa Mía{% endblock %}
+
+{% block branding %}
+  <a class="navbar-brand" href="/">Casa Mía · API</a>
+{% endblock %}
+
+{% block style %}
+  {{ block.super }}
+  <style>
+    .navbar { background: #46544A !important; border-bottom: 3px solid #C96F52 !important; }
+    .navbar-brand, .navbar .nav > li > a { color: #FFF7EC !important; }
+    body { background: #FFF7EC; }
+    .btn-primary { background: #46544A; border-color: #46544A; border-radius: 0; }
+    .breadcrumb, pre { border-radius: 0; }
+  </style>
+{% endblock %}
