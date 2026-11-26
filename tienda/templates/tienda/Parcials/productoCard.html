@@ -1,0 +1,16 @@
+{% load static %}
+<article class="producto">
+  <div class="producto-img tono-{{ p.tono }}">
+    {% if p.imagen %}
+      <img src="{% static p.imagen %}" alt="{{ p.nombre }}">
+    {% else %}
+      <span class="sin-foto">Foto próximamente</span>
+    {% endif %}
+  </div>
+  <div class="producto-info">
+    <h3>{{ p.nombre }}</h3>
+    <p class="precio">$ {{ p.precio }}</p>
+  </div>
+  <p class="producto-desc">{{ p.descripcion }}</p>
+  <a class="btn btn-contorno" href="{% url 'tienda:contacto' %}">Consultar</a>
+</article>

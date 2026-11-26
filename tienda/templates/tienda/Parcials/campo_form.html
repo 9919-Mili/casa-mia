@@ -1,0 +1,9 @@
+
+
+<div class="campo{% if campo.errors %} tiene-error{% endif %}" data-campo="{{ campo.name }}">
+  {{ campo.label_tag }}
+  {{ campo }}
+  <p class="campo-error">{% for e in campo.errors %}{{ e }} {% endfor %}</p>
+</div>
+
+

@@ -1,0 +1,32 @@
+{% with actual=request.resolver_match.url_name %}
+{% load static %}
+
+<header class="cabecera">
+  <nav aria-label="Principal">
+    <a class="logo" href="{% url 'tienda:inicio' %}" aria-label="Casa Mía, ir al inicio">
+  <img src="{% static 'imagenes/logo.png' %}" alt="Casa Mía" height="68">
+</a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">☰</button>
+    <ul id="menu-principal">
+      <li><a href="{% url 'tienda:inicio' %}" {% if actual == 'inicio' %}class="activo"{% endif %}>Inicio</a></li>
+      <li><a href="{% url 'tienda:productos' %}" {% if actual == 'productos' %}class="activo"{% endif %}>Productos</a></li>
+      <li><a href="{% url 'tienda:ideas' %}" {% if actual == 'ideas' %}class="activo"{% endif %}>Ideas para regalar</a></li>
+      <li><a href="{% url 'tienda:nosotros' %}" {% if actual == 'nosotros' %}class="activo"{% endif %}>Nosotros</a></li>
+      <li><a href="{% url 'tienda:contacto' %}" {% if actual == 'contacto' %}class="activo"{% endif %}>Contacto</a></li>
+
+  {% if user.is_authenticated %}
+  <li><a href="{% url 'tienda:panel' %}" class="btn-nav">Panel</a></li>
+  <li class="usuario-nav">{{ user.get_full_name|default:user.username }}</li>
+  <li>
+    <form method="post" action="{% url 'tienda:logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn-nav">Cerrar sesión</button>
+    </form>
+  </li>
+{% endif %}
+
+    </ul>
+  </nav>
+</header>
+{% endwith %}

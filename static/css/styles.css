@@ -1,0 +1,214 @@
+/* Colores y tipografías de la marca */
+
+:root {
+  --rosa: #C98F9B;
+  --terracota: #C96F52;
+  --crema: #FFF7EC;
+  --verde: #46544A;
+  --font-titulo: "DM Serif Display", Georgia, serif;
+  --font-texto: "Poppins", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--verde);
+  font-family: var(--font-texto);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-titulo);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: min(100% - 2.5rem, 1180px);
+  margin-inline: auto;
+  padding: 2rem 0;
+}
+
+/* Barra de navegación */
+.cabecera {
+  background: var(--crema);
+  border-bottom: 1px solid rgba(70, 84, 74, .2);
+}
+
+.cabecera nav {
+  width: min(100% - 2.5rem, 1180px);
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.cabecera nav {
+  width: 100%;
+  margin-inline: 0;
+  padding: .75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cabecera ul {
+  display: flex;
+  gap: .3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cabecera ul a {
+  display: block;
+  padding: .5rem 1rem;
+  border-radius: 0px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cabecera ul a:hover {
+  background: var(--rosa);
+}
+
+.cabecera ul a.activo {
+  background: var(--verde);
+  color: var(--crema);
+}
+
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.logo img {
+  height: 80px;
+  width: auto;
+}
+
+
+/* Avisos */
+.mensajes { width: min(100% - 2.5rem, 1180px); margin: 1rem auto 0; }
+.mensaje { padding: .9rem 1.2rem; border-radius: 0px; border-left: 6px solid var(--verde); background: #DDE3D9; margin-bottom: .5rem; }
+.mensaje-error { background: #F4D9CC; border-left-color: #9C3320; }
+
+
+/* Menú responsive */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 2px solid var(--verde);
+  border-radius: 0px;
+  width: 46px;
+  height: 46px;
+  font-size: 1.4rem;
+  color: var(--verde);
+  cursor: pointer;
+
+}
+
+
+@media (max-width: 860px) {
+  .cabecera nav { flex-wrap: wrap; }
+  .nav-toggle { display: block; }
+  .cabecera ul { display: none; flex-direction: column; width: 100%; padding-top: .5rem; }
+  .cabecera ul.abierto { display: flex; }
+  h1 { font-size: 2.2rem; }
+}
+
+/* Footer */
+.pie {
+  margin-top: 5rem;
+  background: var(--verde);
+  color: var(--crema);
+  font-size: .9rem;
+}
+
+.pie-grilla {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2.5rem;
+  width: min(100% - 2.5rem, 1180px);
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+}
+
+.pie-nombre {
+  font-family: var(--font-titulo);
+  font-size: 2rem;
+  margin: 0 0 .5rem;
+}
+
+.pie-titulo {
+  margin: 0 0 1rem;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rosa);
+}
+
+.pie ul { list-style: none; margin: 0; padding: 0; }
+.pie li { margin-bottom: .45rem; }
+.pie a { color: var(--crema); text-decoration: none; }
+.pie a:hover { text-decoration: underline; }
+
+.pie-legal {
+  width: min(100% - 2.5rem, 1180px);
+  margin: 0 auto;
+  padding: 1.2rem 0;
+  border-top: 1px solid rgba(255, 247, 236, .25);
+  font-size: .78rem;
+  opacity: .75;
+}
+
+@media (max-width: 860px) {
+  .pie-grilla { grid-template-columns: 1fr; gap: 1.8rem; }
+}
+
+/* Usuario logueado en el navbar */
+.usuario-nav {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--terracota);
+}
+
+/* Botones del usuario logueado: Panel y Cerrar sesión (iguales) */
+
+#menu-principal { align-items: center; }
+
+#menu-principal .btn-nav {
+  display: inline-block;
+  padding: .45rem 1rem;
+  border: 1px solid var(--verde);
+  background: transparent;
+  color: var(--verde);
+  font: inherit;
+  font-size: .85rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#menu-principal .btn-nav:hover {
+  background: var(--verde);
+  color: var(--crema);
+}
+
+#menu-principal form { margin: 0; }

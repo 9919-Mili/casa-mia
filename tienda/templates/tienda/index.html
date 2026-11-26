@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+  <section class="hero">
+  <div class="hero-texto">
+    <h1>Bazar, útiles, deco y más</h1>
+    <p class="lead">En Casa Mía encontrás cosas para tu Hogar y para vos!</p>
+    <div class="acciones">
+      <a class="btn btn-primario" href="{% url 'tienda:productos' %}">Ver productos</a>
+      <a class="btn btn-contorno" href="{% url 'tienda:ideas' %}">Ideas para regalar</a>
+    </div>
+  </div>
+
+  <div class="hero-foto">
+    <img src="{% static 'tienda/imagenes/ideasregalar2.png' %}" alt="Tazas pintadas a mano">
+  </div>
+</section>
+
+  <section>
+    <h2>Explorá por categoría</h2>
+ <div class="cats">
+  {% for c in categorias %}
+    <a class="cat tono-{{ c.tono }}" href="{% url 'tienda:productos' %}?categoria={{ c.slug }}">
+      <div class="cat-img">
+        <img src="{% static c.imagen %}" alt="">
+      </div>
+      <div class="cat-texto">
+        <span>
+          <span class="cat-nombre">{{ c.nombre }}</span>
+          <span class="cat-bajada">{{ c.bajada }}</span>
+        </span>
+        <span class="cat-flecha">→</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+  </section>
+
+  <section>
+    <h2>Los favoritos de la casa</h2>
+
+    <div class="mosaico">
+      {% for p in destacados %}
+        <a class="tile" href="{% url 'tienda:contacto' %}">
+          <div class="tile-img">
+            <img src="{% static p.imagen %}" alt="{{ p.nombre }}">
+          </div>
+          <div class="tile-info">
+            <strong>{{ p.nombre }}</strong>
+            <span>$ {{ p.precio }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    <div class="acciones mosaico-acciones">
+      <a class="btn btn-primario" href="{% url 'tienda:productos' %}">Ver todo el catálogo</a>
+    </div>
+  </section>
+{% endblock %}

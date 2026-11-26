@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Registro{% endblock %}
+
+{% block contenido %}
+<section class="cabecera-pagina">
+  <h1>Crear cuenta</h1>
+  <p class="lead">Acceso exclusivo para el personal autorizado de Casa Mía.</p>
+</section>
+
+<form class="form-card" method="post" novalidate>
+  {% csrf_token %}
+  {% for campo in form %}
+    {% include "tienda/Parcials/campo_form.html" %}
+  {% endfor %}
+  <button type="submit" class="btn btn-primario">Registrarme</button>
+  <p>¿Ya tenés cuenta? <a href="{% url 'tienda:login' %}">Iniciá sesión</a></p>
+</form>
+{% endblock %}

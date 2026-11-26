@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Productos{% endblock %}
+
+{% block contenido %}
+  <section>
+    <h1>{% if categoria_activa %}{{ categoria_activa.nombre }}{% else %}Nuestros productos{% endif %}</h1>
+    <p class="lead">Todo el catálogo, organizado por categorías.</p>
+
+    <nav class="chips" aria-label="Filtrar por categoría">
+      <a class="chip{% if not categoria_activa %} activo{% endif %}" href="{% url 'tienda:productos' %}">Todas</a>
+      {% for c in categorias %}
+        <a class="chip{% if categoria_activa.slug == c.slug %} activo{% endif %}"
+           href="{% url 'tienda:productos' %}?categoria={{ c.slug }}">{{ c.nombre }}</a>
+      {% endfor %}
+    </nav>
+  </section>
+
+  {% for grupo in grupos %}
+    <section>
+      {% if not categoria_activa %}
+        <h2>{{ grupo.categoria.nombre }}</h2>
+      {% endif %}
+      <div class="grilla-productos">
+        {% for p in grupo.productos %}
+          {% include "tienda/Parcials/productoCard.html" %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+{% endblock %}

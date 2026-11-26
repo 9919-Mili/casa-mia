@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Panel de administración{% endblock %}
+
+{% block contenido %}
+<section class="cabecera-pagina panel-cabecera">
+  <div>
+    <span class="volanta">Panel de administración</span>
+    <h1>Hola, {{ user.first_name|default:user.username }}</h1>
+    <p class="lead">Gestioná las consultas recibidas desde la web.</p>
+  </div>
+  <a class="btn btn-primario" href="{% url 'tienda:crear_consulta' %}">+ Nueva consulta</a>
+</section>
+
+<!-- Resumen estadístico -->
+<section class="resumen">
+  <article class="resumen-item resumen-total">
+    <span class="resumen-numero">{{ total }}</span>
+    <span class="resumen-texto">Consultas recibidas</span>
+  </article>
+  {% for r in resumen %}
+    <article class="resumen-item">
+      <span class="resumen-numero">{{ r.cantidad }}</span>
+      <span class="resumen-texto">{{ r.nombre }}</span>
+    </article>
+  {% endfor %}
+</section>
+
+<!-- Listado de consultas -->
+{% csrf_token %}
+<div class="tabla-contenedor">
+  <table class="tabla-consultas">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Teléfono</th>
+        <th>Motivo</th>
+        <th>Mensaje</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in consultas %}
+        <tr>
+          <td>#{{ c.id }}</td>
+          <td class="sin-corte">{{ c.fecha_creacion|date:"d/m/Y H:i" }}</td>
+          <td>
+            <strong>{{ c.nombre }}</strong><br>
+            <small>{{ c.email }}</small>
+          </td>
+          <td>{{ c.telefono|default:"-" }}</td>
+          <td>{{ c.get_motivo_display }}</td>
+          <td>{{ c.mensaje|truncatechars:60 }}</td>
+          <td><span class="etiqueta etiqueta-{{ c.categoria }}">{{ c.get_categoria_display }}</span></td>
+          <td>
+            <div class="acciones-tabla">
+              <a class="btn-tabla" href="{% url 'tienda:modificar_consulta' c.id %}">Modificar</a>
+              <button type="button" class="btn-tabla btn-tabla-eliminar eliminar-btn"
+                      data-id="{{ c.id }}" data-nombre="{{ c.nombre }}">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="8" class="tabla-vacia">Todavía no hay consultas.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal de confirmación para eliminar -->
+<dialog id="confirmar-eliminar" class="modal">
+  <h2>Eliminar consulta</h2>
+  <p>¿Seguro que querés eliminar la consulta de <strong id="eliminar-nombre"></strong>? Esta acción no se podra deshacer.</p>
+  <div class="acciones">
+    <button type="button" id="cancelar-eliminar-btn" class="btn btn-contorno">Cancelar</button>
+    <button type="button" id="confirmar-eliminar-btn" class="btn btn-peligro">Eliminar</button>
+  </div>
+</dialog>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'tienda/js/eliminarConsulta.js' %}"></script>
+{% endblock %}
+
+# Panel de administración: resumen + listado (READ)
+@login_required
+def panel(request):
+    consultas = Consulta.objects.all()
+
+    # Resumen estadístico: cantidad por cada categoría
+    resumen = []
+    for clave, nombre in CATEGORIAS_CONSULTA:
+        resumen.append({
+            "clave": clave,
+            "nombre": nombre,
+            "cantidad": consultas.filter(categoria=clave).count(),
+        })
+
+    return render(request, "tienda/panel.html", {
+        "consultas": consultas,
+        "total": consultas.count(),
+        "resumen": resumen,
+    })

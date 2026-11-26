@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Iniciar sesión{% endblock %}
+
+{% block contenido %}
+<section class="cabecera-pagina">
+  <h1>Iniciar sesión</h1>
+</section>
+
+<form class="form-card" method="post" novalidate>
+  {% csrf_token %}
+
+  {% if form.non_field_errors %}
+    <div class="mensaje mensaje-error">{{ form.non_field_errors.0 }}</div>
+  {% endif %}
+
+  {% for campo in form %}
+    {% include "tienda/Parcials/campo_form.html" %}
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primario">Ingresar</button>
+  <p>¿No tenés cuenta? <a href="{% url 'tienda:registro' %}">Registrate</a></p>
+</form>
+{% endblock %}

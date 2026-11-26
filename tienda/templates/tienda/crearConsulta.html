@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Nueva consulta{% endblock %}
+
+{% block contenido %}
+<section class="cabecera-pagina">
+  <span class="volanta">Panel de administración</span>
+  <h1>Nueva consulta</h1>
+  <p class="lead">La categoría se asigna automáticamente según el mensaje.</p>
+</section>
+
+<form class="form-card" method="post" novalidate>
+  {% csrf_token %}
+  {% for campo in form %}
+    {% include "tienda/Parcials/campo_form.html" %}
+  {% endfor %}
+  <div class="acciones">
+    <a class="btn btn-contorno" href="{% url 'tienda:panel' %}">Volver</a>
+    <button type="submit" class="btn btn-primario">Guardar consulta</button>
+  </div>
+</form>
+{% endblock %}

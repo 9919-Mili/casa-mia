@@ -1,0 +1,31 @@
+<footer class="pie">
+  <div class="pie-grilla">
+    <div>
+      <p class="pie-nombre">Casa Mía</p>
+      <p>Bazar y regalería. Objetos lindos, útiles y originales para todos los días.</p>
+    </div>
+
+    <div>
+      <p class="pie-titulo">Secciones</p>
+      <ul>
+        <li><a href="{% url 'tienda:inicio' %}">Inicio</a></li>
+        <li><a href="{% url 'tienda:productos' %}">Productos</a></li>
+        <li><a href="{% url 'tienda:ideas' %}">Ideas para regalar</a></li>
+        <li><a href="{% url 'tienda:nosotros' %}">Nosotros</a></li>
+        <li><a href="{% url 'tienda:contacto' %}">Contacto</a></li>
+        <li><a href="{% url 'tienda:login' %}">Acceso administración</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="pie-titulo">Visitanos</p>
+      <ul>
+        <li>Av. Zapiola 1234, Lobos, Buenos Aires</li>
+        <li>Lunes a sábados de 10 a 19 h</li>
+        <li>maraujo@proyectoweb.website</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="pie-legal">© {% now "Y" %} Casa Mía · Bazar y regalería</p>
+</footer>

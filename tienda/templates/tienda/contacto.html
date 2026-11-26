@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Contacto{% endblock %}
+
+{% block contenido %}
+  <section>
+    <h1>Contacto</h1>
+    <p class="lead">Contanos qué estás buscando y te respondemos a la brevedad. Vas a recibir un correo confirmando que llegó tu consulta.</p>
+  </section>
+
+  <section class="contacto-grid">
+    <aside>
+      <h2>Estamos para ayudarte</h2>
+      <p>Podés consultar por un producto, pedir ideas para un regalo o encargar algo especial.</p>
+      <ul class="datos">
+        <li><strong>Consultas</strong> Respondemos en el día.</li>
+        <li><strong>Horario</strong> Lunes a Sábados de 10hs a 19hs.</li>
+        <li><strong>Dirección</strong> Av. Zapiola 1234, Lobos, Buenos Aires</li>
+      </ul>
+    </aside>
+
+    <form id="form-contacto" class="form-card" method="post" novalidate>
+      {% csrf_token %}
+      {% for campo in form %}
+        {% include "tienda/Parcials/campo_form.html" %}
+      {% endfor %}
+      <button class="btn btn-primario" type="submit">Enviar consulta</button>
+    </form>
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'tienda/js/contacto.js' %}" defer></script>
+{% endblock %}

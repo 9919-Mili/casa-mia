@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Nosotros{% endblock %}
+{% block contenido %}
+  <section>
+    <h1>Quiénes somos</h1>
+    <p class="lead">Casa Mía es un bazar y regalería donde buscamos ofrecer objetos lindos, útiles y originales para todos los días, y distintas opciones para hacer regalos.</p>
+  </section>
+
+  <section class="diferencias">
+    <div>
+      <h2>Qué nos diferencia</h2>
+      <ul class="lista-diferencias">
+        <li>Elegimos pocas piezas de cada cosa, para que tu regalo no sea el de todos.</li>
+        <li>Mezclamos lo cotidiano con lo de diseño: desde una taza hasta un florero de edición limitada.</li>
+        <li>Te ayudamos a elegir. Contanos para quién es y te proponemos opciones.</li>
+        <li>Dejamos que los productos hablen: fotos grandes, precios claros y nada de vueltas.</li>
+      </ul>
+      <a class="btn btn-primario" href="{% url 'tienda:contacto' %}">Escribinos</a>
+    </div>
+    <img class="foto" src="{% static 'tienda/imagenes/ideasregalar2.png' %}" alt="Tazas pintadas a mano">
+  </section>
+
+  <section>
+    <h2>Lo que buscamos en cada objeto</h2>
+    <div class="valores">
+      {% for v in valores %}
+        <article class="valor tono-{{ v.tono }}">
+          <h3>{{ v.titulo }}</h3>
+          <p>{{ v.texto }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

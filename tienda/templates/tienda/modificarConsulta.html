@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Modificar consulta{% endblock %}
+
+{% block contenido %}
+<section class="cabecera-pagina">
+  <span class="volanta">Panel de administración</span>
+  <h1>Modificar consulta{{ consulta.id }}</h1>
+  <p class="lead">Categoría actual: {{ consulta.get_categoria_display }}. Se recalcula sola al guardar.</p>
+</section>
+
+<form id="form-modificar" class="form-card" method="post" novalidate>
+  {% csrf_token %}
+  {% for campo in form %}
+    {% include "tienda/Parcials/campo_form.html" %}
+  {% endfor %}
+  <div class="acciones">
+    <a class="btn btn-contorno" href="{% url 'tienda:panel' %}">Volver</a>
+    <button type="submit" class="btn btn-primario">Guardar cambios</button>
+  </div>
+  <div id="resultado"></div>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'tienda/js/modificar_consulta.js' %}"></script>
+    <script src="{% static 'tienda/js/modificarConsulta.js' %}"></script>
+{% endblock %}

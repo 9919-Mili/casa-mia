@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Validar cuenta{% endblock %}
+
+{% block contenido %}
+<section class="cabecera-pagina">
+  <h1>Valida tu cuenta</h1>
+  <p class="lead">Ingresa el codigo de 6 digitos enviados por mail.</p>
+</section>
+
+<form class="form-card" method="post" novalidate>
+  {% csrf_token %}
+  {% for campo in form %}
+    {% include "tienda/Parcials/campo_form.html" %}
+  {% endfor %}
+  <button type="submit" class="btn btn-primario">Validar</button>
+</form>
+{% endblock %}

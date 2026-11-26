@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'tienda/css/tienda.css' %}">
+{% endblock %}
+
+{% block titulo %}Ideas para Regalar{% endblock %}
+
+{% block contenido %}
+  <section class="hero-regalos">
+    <div>
+      <h1>Ideas para regalar</h1>
+      <p class="lead">Propuestas pensadas para cada ocasión, con productos de nuestro catálogo. Si querés algo a medida. ¡Te ayudamos!.</p>
+      <a class="btn btn-primario" href="{% url 'tienda:contacto' %}">Pedir ayuda para elegir</a>
+    </div>
+    <div class="mosaico-regalos">
+      <img class="foto" src="{% static 'tienda/imagenes/ideasregalar1.png' %}" alt="Caja de regalo con moño rosa">
+      <img class="foto" src="{% static 'tienda/imagenes/ideasregalar2.png' %}" alt="Regalo armado con vela y taza">
+      <img class="foto" src="{% static 'tienda/imagenes/ideasregalar3.png' %}" alt="Set de regalo con tazas y velas">
+      <img class="foto" src="{% static 'tienda/imagenes/ideasregalar4.png' %}" alt="Set de floreros modernos">
+    </div>
+  </section>
+
+  {% for o in ocasiones %}
+    <section class="ocasion tono-{{ o.tono }}">
+      <div class="ocasion-texto">
+        <img class="foto" src="{% static 'tienda/imagenes/'|add:o.foto %}" alt="Idea de regalo para {{ o.titulo }}">
+        <h2>{{ o.titulo }}</h2>
+        <p>{{ o.texto }}</p>
+        {% if o.desde %}
+          <p class="ocasion-desde">Desde $ {{ o.desde }}</p>
+        {% endif %}
+      </div>
+      <div class="grilla-productos">
+        {% for p in o.productos %}
+          {% include "tienda/Parcials/productoCard.html" %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+
+{% if paletas %}
+<section class="seccion paletas">
+  <span class="volanta">Combiná tus objetos</span>
+  <h2>Paletas para decorar</h2>
+  <p class="lead">Colores que combinan con nuestras piezas, generados a partir de los tonos de Casa Mía.</p>
+
+  <div class="paletas-grilla">
+    {% for p in paletas %}
+      <article class="paleta">
+        <div class="paleta-colores">
+          {% for c in p.colores %}
+            <div class="paleta-color" style="background: {{ c.hex.value }};"></div>
+          {% endfor %}
+        </div>
+
+        <div class="paleta-info">
+          <strong>A partir del {{ p.nombre|lower }}</strong>
+          <ul>
+            {% for c in p.colores %}
+              <li>
+                <span class="paleta-muestra" style="background: {{ c.hex.value }};"></span>
+                {{ c.name.value }}
+                <small>{{ c.hex.value }}</small>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

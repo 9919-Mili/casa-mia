@@ -1,0 +1,17 @@
+{% autoescape off %}Hola {{ primer_nombre }}:
+
+¡Gracias por escribirnos! Recibimos tu consulta correctamente, te responderemos a la brevedad.
+
+Resumen de lo que nos enviaste
+Categoría: {{ categoria }}
+Nombre: {{ nombre }}
+Correo: {{ email }}
+Teléfono: {{ telefono|default:"-" }}
+Motivo: {{ motivo_texto }}
+Mensaje: {{ mensaje }}
+
+Si necesitás agregar algo, respondé este correo.
+
+Un abrazo,
+El equipo de Casa Mía!
+{% endautoescape %}
