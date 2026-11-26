@@ -19,8 +19,8 @@
 - **Sitio publicado en Render:** https://casa-mia-daho.onrender.com
 - **Repositorio en GitHub:** https://github.com/9919-Mili/casa-mia.git
 - **API externa utilizada:** The Color API – https://www.thecolorapi.com/scheme
-- **API propia:** https://casa-mia-daho.onrender.com/api/consultas/  #Se utilizaria en caso de que algun cliente quiera algun producto de un color especifico.g
-- - **API externa utilizada:** The Color API – https://www.thecolorapi.com · Ejemplo de consulta: https://www.thecolorapi.com/scheme?hex=C96F52&mode=analogic&count=5
+- **API propia:** https://casa-mia-daho.onrender.com/api/consultas/  
+- **API externa utilizada:** The Color API – https://www.thecolorapi.com · Ejemplo de consulta: https://www.thecolorapi.com/scheme?hex=C96F52&mode=monochrome&count=5 #Se utilizaria en caso de que algun cliente quiera algun producto de un color especifico.
 
 > El plan gratuito de Render suspende el sitio cuando no se usa: la primera carga puede tardar unos 50 segundos.
 
@@ -31,3 +31,5 @@
 ## Descripción
 
 Sitio web Casa Mía, un bazar y regalería ubicado en Lobos (Buenos Aires). Incluye catálogo de productos.
+
+¿Como ingresar al Panel de Consultas? desde Footer "Acceso Administracion"

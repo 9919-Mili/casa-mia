@@ -246,7 +246,7 @@ def validar_cuenta(request):
     else:
         # Si viene desde el enlace del mail, el email ya queda cargado
         form = ValidarCuentaForm(initial={"email": request.GET.get("email", "")})
-    return render(request, "tienda/validarCuenta.html", {"form": form})
+    return render(request, "tienda/validarcuenta.html", {"form": form})
 
 # Panel de administración: resumen + listado (READ)
 @login_required
