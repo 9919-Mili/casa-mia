@@ -149,7 +149,7 @@ EMAIL_HOST_USER = "maraujo@proyectoweb.website"
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-EMAIL_TIMEOUT = 20
+EMAIL_TIMEOUT = 5
 
 DEFAULT_FROM_EMAIL = "Casa Mía <maraujo@proyectoweb.website>"
 
